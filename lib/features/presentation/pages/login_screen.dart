@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
         () {
           if (authController.isLoggedIn.value) {
             Future.microtask(
-              () => Get.off(const Home()),
+              () => Get.off( Home()),
             );
           }
           return Container(

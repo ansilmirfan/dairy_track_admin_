@@ -34,7 +34,6 @@ class _UserManagementState extends State<UserManagement> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController placeController = TextEditingController();
   final TextEditingController licenseController = TextEditingController();
@@ -74,7 +73,7 @@ class _UserManagementState extends State<UserManagement> {
         //----------name---------------
         CustomTextFormField(
           controller: nameController,
-          labelText: 'Full Name',
+          labelText: entityType == 'Driver' ? 'Full Name' : 'Shop Name',
           validator: Validations.validateName,
         ),
         const Gap(),

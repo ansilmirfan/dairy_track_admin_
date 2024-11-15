@@ -1,10 +1,16 @@
+// ignore_for_file: invalid_use_of_protected_member
+
+import 'package:dairy_track_admin/features/presentation/getx/user_management.dart';
+import 'package:dairy_track_admin/features/presentation/pages/home/widgets/custom_listview.dart';
 import 'package:dairy_track_admin/features/presentation/pages/user_management/user_management.dart';
 import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+  final UserManagementController userManagementController =
+      Get.put(UserManagementController());
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +18,17 @@ class Home extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: _appBar(),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            Center(child: Text("Drivers Content")),
-            Center(child: Text("Shops Content")),
+            Obx(
+              () => CustomListView(
+                drivers: userManagementController.driversList.value,
+              ),
+            ),
+            Obx(() => CustomListView(
+                  sellers: userManagementController.shopsModel.value,
+                  fromStore: true,
+                )),
           ],
         ),
         floatingActionButton: _floatingActionButton(),

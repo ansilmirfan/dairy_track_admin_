@@ -26,10 +26,9 @@ class CustomListView extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
               return CustomListtile(
-                name: fromStore ? (item as StoreModel).name : (item as DriverModel).name,
-                id: fromStore ? (item as StoreModel).id : (item as DriverModel).id,
-                onPressedDelete: () {},
-                onPressedEdit: () {},
+                fromStore: fromStore,
+                item: item,
+                
               );
             },
           );

@@ -7,8 +7,20 @@ import 'package:dairy_track_admin/features/data/models/store_model.dart';
 import 'package:get/get.dart';
 
 class UserManagementController extends GetxController {
+  final DataSource _dataSource = DataSource();
   var loading = false.obs;
   var success = false.obs;
+  var driversList = <DriverModel>[].obs;
+  var shopsModel = <StoreModel>[].obs;
+  UserManagementController() {
+    _dataSource.featchAll('drivers').listen((data) {
+      driversList.value = data.map((e) => DriverModel.fromMap(e)).toList();
+    });
+    _dataSource.featchAll('sellers').listen((data) {
+      shopsModel.value = data.map((e) => StoreModel.fromMap(e)).toList();
+      log('this much data is available in${data.length} ');
+    });
+  }
   //-------create user-------------
   void createUser(
       {DriverModel? driverModel,
@@ -17,13 +29,13 @@ class UserManagementController extends GetxController {
     try {
       if (driver) {
         updateLoading();
-        await DataSource().create('drivers', DriverModel.toMap(driverModel!));
+        await _dataSource.create('drivers', DriverModel.toMap(driverModel!));
         updateLoading(status: false);
 
         Get.back();
       } else {
         updateLoading();
-        await DataSource().create('sellers', StoreModel.toMap(storeModel!));
+        await _dataSource.create('sellers', StoreModel.toMap(storeModel!));
         updateLoading(status: false);
         success.value = true;
       }
@@ -37,9 +49,15 @@ class UserManagementController extends GetxController {
   //-------uodate user-------------
   void updateUser() {}
   //-------delete user------------
-  void deleteUser() {}
+  deleteUser(String id, String collection) async {
+    updateLoading();
+    await _dataSource.delete(id, collection);
+    updateLoading(status: false);
+  }
+
   //----get all users-----------
-  void getAllUser() {}
+  void getAllDrivers() {}
+//----------updating loading---------
   updateLoading({bool status = true}) {
     loading.value = status;
   }

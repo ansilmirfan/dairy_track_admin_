@@ -14,6 +14,15 @@ class StoreModel {
       required this.location,
       required this.place,
       required this.route});
+  factory StoreModel.fromMap(Map<String, dynamic> map) {
+    return StoreModel(
+        id: map['id'],
+        name: map['name'],
+        phoneNumber: map['phone number'],
+        location: map['location'],
+        place: map['place'],
+        route: map['route']);
+  }
   static Map<String, dynamic> toMap(StoreModel storeModel) {
     return {
       'id': storeModel.id,
