@@ -1,11 +1,11 @@
-import 'package:dairy_track_admin/presentation/getx/log_in_auth.dart';
-import 'package:dairy_track_admin/presentation/pages/home.dart';
-import 'package:dairy_track_admin/presentation/themes/themes.dart';
-import 'package:dairy_track_admin/presentation/widgets/custom_text_button.dart';
-import 'package:dairy_track_admin/presentation/widgets/custom_textformfiled.dart';
-import 'package:dairy_track_admin/presentation/widgets/elevated_container.dart';
-import 'package:dairy_track_admin/presentation/widgets/gap.dart';
-import 'package:dairy_track_admin/presentation/widgets/text/bold_title_text.dart';
+import 'package:dairy_track_admin/features/presentation/getx/log_in_auth.dart';
+import 'package:dairy_track_admin/features/presentation/pages/home/home.dart';
+import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/custom_text_button.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/custom_textformfiled.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/elevated_container.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/gap.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/text/bold_title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

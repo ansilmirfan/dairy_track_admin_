@@ -1,5 +1,5 @@
-import 'package:dairy_track_admin/presentation/pages/user_management/user_management.dart';
-import 'package:dairy_track_admin/presentation/themes/themes.dart';
+import 'package:dairy_track_admin/features/presentation/pages/user_management/user_management.dart';
+import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

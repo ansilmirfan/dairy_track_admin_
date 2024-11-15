@@ -1,4 +1,4 @@
-import 'package:dairy_track_admin/presentation/widgets/custom_snackbar.dart';
+import 'package:dairy_track_admin/features/presentation/widgets/custom_snackbar.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 

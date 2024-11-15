@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073704809574",
+    "project_id": "dairy-track",
+    "storage_bucket": "dairy-track.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073704809574:android:8ac556621b8763e96869a7",
+        "android_client_info": {
+          "package_name": "com.ansil.dairy_track_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1nI_zSdiRhAaJrBkZwZD1eMmIUkDBYwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

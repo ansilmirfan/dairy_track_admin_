@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:dairy_track_admin/presentation/themes/themes.dart';
+import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -11,7 +11,7 @@ class CustomTextButton extends StatelessWidget {
 
   CustomTextButton({
     super.key,
-    required this.text,
+    this.text = '',
     this.onPressed,
     this.progress = false,
   });
@@ -24,14 +24,18 @@ class CustomTextButton extends StatelessWidget {
       child: FilledButton(
         style: _buttonStyle(),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Themes.secondary,
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: progress
+            ? CircularProgressIndicator(
+                color: Themes.secondary,
+              )
+            : Text(
+                text,
+                style: TextStyle(
+                  color: Themes.secondary,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
       ),
     );
   }

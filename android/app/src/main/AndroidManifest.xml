@@ -3,6 +3,9 @@
         android:label="dairy_track_admin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAErh9kRFOKWrGjSpcatry-H4F0Hx1V2so"/>
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
