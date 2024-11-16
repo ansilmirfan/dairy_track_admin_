@@ -151,17 +151,18 @@ class _UserManagementState extends State<UserManagement> {
         if (entityType == 'Driver') {
           userManagementController.createUser(
               driverModel: DriverModel(
-                  id: '',
-                  name: nameController.text.trim(),
-                  userName: userNameController.text.trim(),
-                  password: passwordController.text.trim(),
-                  licenceNumber: licenseController.text.trim(),
-                  phoneNumber: int.parse(phoneController.text.trim()),
-                  route: route));
+            id: '',
+            name: nameController.text.trim(),
+            userName: userNameController.text.trim(),
+            password: passwordController.text.trim(),
+            licenceNumber: licenseController.text.trim(),
+            phoneNumber: int.parse(phoneController.text.trim()),
+            route: route,
+          ));
         } else {
           userManagementController.createUser(
               driver: false,
-              storeModel: StoreModel(
+              storeModel: ShopModel(
                   id: '',
                   name: nameController.text.trim(),
                   phoneNumber: int.parse(phoneController.text.trim()),

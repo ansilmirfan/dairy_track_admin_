@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class StoreModel {
+class ShopModel {
   String id;
   String name;
   int phoneNumber;
   String place;
   String route;
   GeoPoint location;
-  StoreModel(
+  ShopModel(
       {required this.id,
       required this.name,
       required this.phoneNumber,
       required this.location,
       required this.place,
       required this.route});
-  factory StoreModel.fromMap(Map<String, dynamic> map) {
-    return StoreModel(
+  factory ShopModel.fromMap(Map<String, dynamic> map) {
+    return ShopModel(
         id: map['id'],
         name: map['name'],
         phoneNumber: map['phone number'],
@@ -23,7 +23,7 @@ class StoreModel {
         place: map['place'],
         route: map['route']);
   }
-  static Map<String, dynamic> toMap(StoreModel storeModel) {
+  static Map<String, dynamic> toMap(ShopModel storeModel) {
     return {
       'id': storeModel.id,
       'name': storeModel.name,

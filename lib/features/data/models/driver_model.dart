@@ -5,16 +5,18 @@ class DriverModel {
   String password;
   int phoneNumber;
   String licenceNumber;
+
   String route;
-  DriverModel({
-    required this.id,
-    required this.name,
-    required this.userName,
-    required this.password,
-    required this.licenceNumber,
-    required this.phoneNumber,
-    required this.route,
-  });
+ 
+  DriverModel(
+      {required this.id,
+      required this.name,
+      required this.userName,
+      required this.password,
+      required this.licenceNumber,
+      required this.phoneNumber,
+      required this.route,
+     });
   static Map<String, dynamic> toMap(DriverModel driver) {
     return {
       'id': driver.id,
@@ -24,6 +26,7 @@ class DriverModel {
       'phone number': driver.phoneNumber,
       'licence number': driver.licenceNumber,
       'route': driver.route,
+     
     };
   }
 
@@ -35,6 +38,7 @@ class DriverModel {
         password: map['password'],
         licenceNumber: map['licence number'],
         phoneNumber: map['phone number'],
-        route: map['route']);
+        route: map['route'],
+       );
   }
 }

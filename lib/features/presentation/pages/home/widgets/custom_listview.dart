@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class CustomListView extends StatelessWidget {
   final List<DriverModel> drivers;
-  final List<StoreModel> sellers;
+  final List<ShopModel> sellers;
   final bool fromStore;
 
   const CustomListView({
@@ -28,7 +28,6 @@ class CustomListView extends StatelessWidget {
               return CustomListtile(
                 fromStore: fromStore,
                 item: item,
-                
               );
             },
           );

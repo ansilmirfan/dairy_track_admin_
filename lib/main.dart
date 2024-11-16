@@ -1,4 +1,5 @@
 import 'package:dairy_track_admin/features/presentation/pages/login_screen.dart';
+import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(
+          appBarTheme: AppBarTheme(
+              centerTitle: true, foregroundColor: Themes.secondary,backgroundColor: Themes.primary)),
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
     );

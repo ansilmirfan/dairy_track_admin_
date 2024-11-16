@@ -1,4 +1,5 @@
 import 'package:dairy_track_admin/features/presentation/getx/log_in_auth.dart';
+import 'package:dairy_track_admin/features/presentation/getx/user_management.dart';
 import 'package:dairy_track_admin/features/presentation/pages/home/home.dart';
 import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:dairy_track_admin/features/presentation/widgets/custom_text_button.dart';
@@ -17,13 +18,14 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(UserManagementController());
     var width = Get.mediaQuery.size.width;
     return Scaffold(
       body: Obx(
         () {
           if (authController.isLoggedIn.value) {
             Future.microtask(
-              () => Get.off( Home()),
+              () => Get.off(Home()),
             );
           }
           return Container(

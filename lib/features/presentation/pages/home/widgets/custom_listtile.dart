@@ -1,8 +1,11 @@
 import 'package:dairy_track_admin/features/data/models/driver_model.dart';
 import 'package:dairy_track_admin/features/data/models/store_model.dart';
 import 'package:dairy_track_admin/features/presentation/pages/home/widgets/delete_alert_dialog.dart';
-import 'package:dairy_track_admin/features/presentation/pages/home/widgets/detaild_view.dart';
+import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detaild_view_shop.dart';
+import 'package:dairy_track_admin/features/presentation/pages/home/widgets/detailed_view_driver.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomListtile extends StatelessWidget {
   final bool fromStore;
@@ -16,11 +19,11 @@ class CustomListtile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name =
-        fromStore ? (item as StoreModel).name : (item as DriverModel).name;
+        fromStore ? (item as ShopModel).name : (item as DriverModel).name;
     final route =
-        fromStore ? (item as StoreModel).route : (item as DriverModel).route;
+        fromStore ? (item as ShopModel).route : (item as DriverModel).route;
     final String id =
-        fromStore ? (item as StoreModel).id : (item as DriverModel).id;
+        fromStore ? (item as ShopModel).id : (item as DriverModel).id;
 
     return ListTile(
       leading: _circleAvathar(),
@@ -28,9 +31,11 @@ class CustomListtile extends StatelessWidget {
       subtitle: Text(route),
       onTap: () {
         if (fromStore) {
-          showUserDetails(fromStore: true, store: item as StoreModel);
+          showStoreDetails(store: item as ShopModel);
         } else {
-          showUserDetails(driver: item as DriverModel);
+          Get.to(DriverDetailsPage(
+            driver: item,
+          ));
         }
       },
       trailing: Row(
@@ -55,7 +60,7 @@ class CustomListtile extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: Colors.blue.shade100,
       child: Text(
-        (fromStore ? (item as StoreModel).name : (item as DriverModel).name)[0]
+        (fromStore ? (item as ShopModel).name : (item as DriverModel).name)[0]
             .toUpperCase(),
         style: const TextStyle(color: Colors.blue),
       ),

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dairy_track_admin/core/error/firebase_auth_exception.dart';
+import 'package:dairy_track_admin/core/utils/utils.dart';
+import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detaild_view_shop.dart';
 
 class DataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -78,18 +80,38 @@ class DataSource {
   }
 
 //-----------create-----------------------
-  Future<String?> create(String collection, Map<String, dynamic> data) async {
+  Future<String?> create(String collection, Map<String, dynamic> data,
+      [String? id]) async {
     try {
-      final docs = await _firestore.collection(collection).add(data);
-      await _firestore
-          .collection(collection)
-          .doc(docs.id)
-          .update({'id': docs.id});
-      return docs.id;
+      if (id == null) {
+        final docs = await _firestore.collection(collection).add(data);
+        await _firestore
+            .collection(collection)
+            .doc(docs.id)
+            .update({'id': docs.id});
+        return docs.id;
+      } else {
+        await _firestore.collection(collection).doc(id).set(data);
+      }
     } on FirebaseException catch (e) {
       throw FirebaseExceptions.handleFirebaseExceptions(e);
     } catch (e) {
       throw e.toString();
+    }
+  }
+
+  Future<bool> checkQuantityUpdated(String id) async {
+    try {
+      final data = await _firestore
+          .collection('delivery datasource')
+          .where('date', isEqualTo: Utils.formatDate(DateTime.now()))
+          .where('driver', isEqualTo: id)
+          .get();
+      return data.docChanges.isNotEmpty;
+    } on FirebaseException catch (e) {
+      throw FirebaseExceptions.handleFirebaseExceptions(e);
+    } catch (e) {
+      return false;
     }
   }
 }

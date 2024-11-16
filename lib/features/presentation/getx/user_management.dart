@@ -11,31 +11,37 @@ class UserManagementController extends GetxController {
   var loading = false.obs;
   var success = false.obs;
   var driversList = <DriverModel>[].obs;
-  var shopsModel = <StoreModel>[].obs;
+  var shopsModel = <ShopModel>[].obs;
+  //-----getting all the data from firebase using stream to listen------------
   UserManagementController() {
     _dataSource.featchAll('drivers').listen((data) {
       driversList.value = data.map((e) => DriverModel.fromMap(e)).toList();
     });
     _dataSource.featchAll('sellers').listen((data) {
-      shopsModel.value = data.map((e) => StoreModel.fromMap(e)).toList();
+      shopsModel.value = data.map((e) => ShopModel.fromMap(e)).toList();
       log('this much data is available in${data.length} ');
     });
   }
   //-------create user-------------
   void createUser(
       {DriverModel? driverModel,
-      StoreModel? storeModel,
+      ShopModel? storeModel,
       bool driver = true}) async {
     try {
       if (driver) {
         updateLoading();
-        await _dataSource.create('drivers', DriverModel.toMap(driverModel!));
+        final id = await _dataSource.create(
+            'drivers', DriverModel.toMap(driverModel!));
+        if (id != null) {
+          await _dataSource.create('deliveries', {'reference': []}, id);
+        }
+
         updateLoading(status: false);
 
         Get.back();
       } else {
         updateLoading();
-        await _dataSource.create('sellers', StoreModel.toMap(storeModel!));
+        await _dataSource.create('sellers', ShopModel.toMap(storeModel!));
         updateLoading(status: false);
         success.value = true;
       }
