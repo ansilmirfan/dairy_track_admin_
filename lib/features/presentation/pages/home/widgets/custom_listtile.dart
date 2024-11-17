@@ -3,6 +3,7 @@ import 'package:dairy_track_admin/features/data/models/store_model.dart';
 import 'package:dairy_track_admin/features/presentation/pages/home/widgets/delete_alert_dialog.dart';
 import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detaild_view_shop.dart';
 import 'package:dairy_track_admin/features/presentation/pages/home/widgets/detailed_view_driver.dart';
+import 'package:dairy_track_admin/features/presentation/pages/user_management/edit_user_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,13 @@ class CustomListtile extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => EditUserPage(
+                    drivers: !fromStore,
+                    driverModel: fromStore ? null : item,
+                    shopModel: fromStore ? item : null,
+                  ));
+            },
           ),
           IconButton(
             icon: const Icon(Icons.delete),

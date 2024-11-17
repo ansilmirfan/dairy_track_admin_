@@ -31,18 +31,18 @@ class Home extends StatelessWidget {
                 )),
           ],
         ),
-        floatingActionButton: _floatingActionButton(),
+        floatingActionButton: _floatingActionButton(context),
       ),
     );
   }
 
-  FloatingActionButton _floatingActionButton() {
+  FloatingActionButton _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
       backgroundColor: Themes.primary,
       foregroundColor: Themes.secondary,
       shape: const CircleBorder(),
       onPressed: () {
-        Get.to(const UserManagement());
+        Get.to(() => const UserManagement());
       },
       child: const Icon(Icons.add),
     );

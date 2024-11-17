@@ -1,10 +1,13 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dairy_track_admin/core/constants/constants.dart';
 import 'package:dairy_track_admin/features/data/models/driver_model.dart';
 import 'package:dairy_track_admin/features/data/models/store_model.dart';
 import 'package:dairy_track_admin/features/presentation/getx/user_management.dart';
+import 'package:dairy_track_admin/features/presentation/pages/home/home.dart';
 import 'package:dairy_track_admin/features/presentation/pages/user_management/map.dart';
 import 'package:dairy_track_admin/features/presentation/themes/themes.dart';
 import 'package:dairy_track_admin/features/presentation/widgets/custom_dropdown.dart';
@@ -14,17 +17,21 @@ import 'package:dairy_track_admin/features/presentation/widgets/custom_textformf
 import 'package:dairy_track_admin/features/presentation/widgets/gap.dart';
 import 'package:dairy_track_admin/core/validations/validations.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class UserManagement extends StatefulWidget {
-  const UserManagement({super.key});
+class EditUserPage extends StatefulWidget {
+  final bool drivers;
+  final DriverModel? driverModel;
+  final ShopModel? shopModel;
+  const EditUserPage(
+      {super.key, required this.drivers, this.driverModel, this.shopModel});
   @override
-  _UserManagementState createState() => _UserManagementState();
+  _EditUserPageState createState() => _EditUserPageState();
 }
 
-class _UserManagementState extends State<UserManagement> {
+class _EditUserPageState extends State<EditUserPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String entityType = 'Driver';
   String route = 'Kalpetta';
@@ -37,6 +44,11 @@ class _UserManagementState extends State<UserManagement> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController placeController = TextEditingController();
   final TextEditingController licenseController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _intialiseFields();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,9 +159,9 @@ class _UserManagementState extends State<UserManagement> {
             isSuccess: false);
       } else {
         if (entityType == 'Driver') {
-          userManagementController.createUser(
+          userManagementController.updateUser(
               driverModel: DriverModel(
-            id: '',
+            id: widget.driverModel?.id ?? '',
             name: nameController.text.trim(),
             userName: userNameController.text.trim(),
             password: passwordController.text.trim(),
@@ -158,10 +170,10 @@ class _UserManagementState extends State<UserManagement> {
             route: route,
           ));
         } else {
-          userManagementController.createUser(
+          userManagementController.updateUser(
               driver: false,
               storeModel: ShopModel(
-                  id: '',
+                  id: widget.shopModel?.id ?? '',
                   name: nameController.text.trim(),
                   phoneNumber: int.parse(phoneController.text.trim()),
                   location: GeoPoint(location!.latitude, location!.longitude),
@@ -226,5 +238,26 @@ class _UserManagementState extends State<UserManagement> {
       backgroundColor: Themes.primary,
       foregroundColor: Themes.secondary,
     );
+  }
+
+  void _intialiseFields() {
+    entityType = widget.drivers ? 'Driver' : 'Store';
+    route =
+        widget.drivers ? widget.driverModel!.route : widget.shopModel!.route;
+
+    nameController.text =
+        widget.drivers ? widget.driverModel!.name : widget.shopModel!.name;
+    phoneController.text = widget.drivers
+        ? widget.driverModel!.phoneNumber.toString()
+        : widget.shopModel!.phoneNumber.toString();
+    if (widget.drivers) {
+      userNameController.text = widget.driverModel!.userName;
+      passwordController.text = widget.driverModel!.password;
+      licenseController.text = widget.driverModel!.licenceNumber;
+    } else {
+      placeController.text = widget.shopModel!.place;
+      location = LatLng(widget.shopModel!.location.latitude,
+          widget.shopModel!.location.latitude);
+    }
   }
 }

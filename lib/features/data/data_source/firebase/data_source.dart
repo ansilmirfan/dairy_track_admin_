@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dairy_track_admin/core/error/firebase_auth_exception.dart';
 import 'package:dairy_track_admin/core/utils/utils.dart';
-import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detaild_view_shop.dart';
 
 class DataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -98,6 +97,7 @@ class DataSource {
     } catch (e) {
       throw e.toString();
     }
+    return null;
   }
 
   Future<bool> checkQuantityUpdated(String id) async {
