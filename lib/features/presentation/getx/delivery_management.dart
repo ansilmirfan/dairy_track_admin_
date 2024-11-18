@@ -42,6 +42,7 @@ class DeliveryManagementController extends GetxController {
               .firstWhere((e) => e.id == element['shop id']);
           shopDeliveryModel.add(ShopDeliveryModel(
               shopModel: model,
+              dateTime: DateTime.tryParse(element['date'] ?? ''),
               deliveredQuantity: element['delivered quantity'],
               status: element['status']));
         }
@@ -74,5 +75,28 @@ class DeliveryManagementController extends GetxController {
     }
     loading.value = false;
     checkQuantityUpdated(model.driver.id);
+  }
+
+  Future<DeliveryModel> getDeliveryModel(String id, String driverId) async {
+    loading.value = true;
+    final map = await _dataSource.getOne('delivery datasource', id);
+    final driverMap = await _dataSource.getOne('drivers', driverId);
+    final List<ShopDeliveryModel> shopDeliveryModel = [];
+    final List<Map> shops = List<Map>.from(map['shops'] ?? []);
+    //------------converting shops from firebase to shodeliverymodel-------------
+    for (var element in shops) {
+      ShopModel model = userManagementController.shopsModel.value
+          .firstWhere((e) => e.id == element['shop id']);
+      shopDeliveryModel.add(ShopDeliveryModel(
+          shopModel: model,
+          dateTime: DateTime.tryParse(element['date'] ?? ''),
+          deliveredQuantity: element['delivered quantity'],
+          status: element['status']));
+    }
+    loading.value = false;
+    return DeliveryModel.fromMap(
+        driverModel: DriverModel.fromMap(driverMap),
+        map: map,
+        shops: shopDeliveryModel);
   }
 }

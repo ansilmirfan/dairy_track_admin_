@@ -42,16 +42,22 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            ..._driversDetailsForm,
-            const Gap(),
-            _stockQuantityInputRow(),
-            const Gap(),
-            _totalDeliveries()
-          ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          deliveryManagementController.checkQuantityUpdated(widget.driver.id);
+          deliveryManagementController.getAllOrders(widget.driver.id);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: [
+              ..._driversDetailsForm,
+              const Gap(),
+              _stockQuantityInputRow(),
+              const Gap(),
+              _totalDeliveries()
+            ],
+          ),
         ),
       ),
     );
@@ -115,6 +121,7 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                           date: DateTime.now(),
                           route: widget.driver.route,
                           initialStock: double.parse(controller.text.trim()),
+                          remainingStock: double.parse(controller.text.trim()),
                           shops: userManagementController.shopsModel.value
                               .where((e) => e.route == widget.driver.route)
                               .map((e) => ShopDeliveryModel(shopModel: e))

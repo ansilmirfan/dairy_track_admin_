@@ -1,8 +1,8 @@
 import 'package:dairy_track_admin/features/data/models/driver_model.dart';
 import 'package:dairy_track_admin/features/data/models/store_model.dart';
 import 'package:dairy_track_admin/features/presentation/pages/home/widgets/delete_alert_dialog.dart';
-import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detaild_view_shop.dart';
-import 'package:dairy_track_admin/features/presentation/pages/home/widgets/detailed_view_driver.dart';
+import 'package:dairy_track_admin/features/presentation/pages/home/widgets/detaild_view_shop.dart';
+import 'package:dairy_track_admin/features/presentation/pages/driver%20details/detailed_view_driver.dart';
 import 'package:dairy_track_admin/features/presentation/pages/user_management/edit_user_page.dart';
 
 import 'package:flutter/material.dart';

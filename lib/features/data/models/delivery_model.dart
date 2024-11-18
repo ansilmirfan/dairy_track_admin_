@@ -51,6 +51,7 @@ class DeliveryModel {
                 'shop id': e.shopModel.id,
                 'status': e.status,
                 'delivered quantity': e.deliveredQuantity,
+                'date': e.dateTime
               })
           .toList(),
     };
@@ -61,9 +62,11 @@ class ShopDeliveryModel {
   final ShopModel shopModel;
   final double deliveredQuantity;
   final String status;
+  final DateTime? dateTime;
   ShopDeliveryModel({
     required this.shopModel,
     this.deliveredQuantity = 0,
     this.status = 'unknown',
+    this.dateTime,
   });
 }
